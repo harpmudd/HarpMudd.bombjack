@@ -1,0 +1,15 @@
+{
+    "data": {
+        "magic": "APF_VER_1",
+        "data_slots": [
+            {
+                "name": "Bomb Jack (Tehkan, 1984) ROM",
+                "id": 1,
+                "required": true,
+                "parameters": "0x108",
+                "filename": "bombjack.rom",
+                "address": "0x00000000"
+            }
+        ]
+    }
+}

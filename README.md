@@ -68,6 +68,10 @@ SD card).
 - **MiSTer port:** Sorgelig
 - **FPGA arcade core:** d18c7db (papilio), DE1-SoC adaptation by MVV
 - **Analogue Pocket port:** HarpMudd
+- **Z80 CPU core (T80):** Daniel Wallner, with later work by MikeJ, Sean Riddle, TobiFlex and Sorgelig
+- **SDRAM controller, data loader, I2S audio, sync FIFO:** Adam Gastineau (agg23)
+- **openFPGA framework (APF), bridge command handler, reference `core_top`:** Analogue
+- **PLL and other megafunctions:** Intel/Altera (Quartus-generated)
 
 ## About / Support
 

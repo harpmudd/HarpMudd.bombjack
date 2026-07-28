@@ -1,7 +1,7 @@
 # Bomb Jack (Tehkan, 1984) — Analogue Pocket
 
-An Analogue Pocket port of **Bomb Jack** (Tehkan, 1984) by **HarpMudd**,
-built on the openFPGA framework.
+An Analogue Pocket port of **Bomb Jack** (Tehkan, 1984), built on the
+openFPGA framework.
 
 ## The Game
 

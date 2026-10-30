@@ -495,8 +495,7 @@ assign video_hs           = vid_hs_r;
 
 // -- Audio (8-bit unsigned widened to 16, box-filter decimate to ~47 kHz I2S) --
 // bombjack_top drives audio as 8-bit unsigned (MiSTer: AUDIO_L = {audio,audio},
-// AUDIO_S = 0). Same decimator structure as shollow/Popeye/Tapper
-// (48 MHz / 1024 = 46.875 kHz).
+// AUDIO_S = 0). 48 MHz / 1024 = 46.875 kHz.
 wire [15:0] audio_l_raw = {audio_raw, audio_raw};
 wire [15:0] audio_r_raw = {audio_raw, audio_raw};
 

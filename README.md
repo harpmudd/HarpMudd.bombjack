@@ -84,8 +84,9 @@ there; the menu lists all four either way.
 
 ## Notes
 
-DIP settings are fixed at the factory-style defaults: demo sounds on,
-upright cabinet, 3 lives, easy difficulty, bonus life every 30,000.
+DIP settings are fixed: demo sounds on, upright cabinet, 3 lives, bird speed
+easy, enemies medium. The bonus-life switch never awards a life on this game
+(a quirk of the original program).
 
 ## Credits
 

@@ -388,8 +388,10 @@ wire m_jump   = cont1_key[4] | cont1_key[5] | cont1_key[6] | cont1_key[7]
               | cont2_key[4] | cont2_key[5] | cont2_key[6] | cont2_key[7];
 
 // -- Bomb Jack game core (VHDL entity) -----------------------------------------
-// DIP presets (factory-style defaults; the entity takes switches as ports):
-//   demo sounds on, upright, 3 lives, enemies easy, bird easy, bonus every 30k.
+// DIP presets (the entity takes switches as ports), per MAME's switch table:
+//   demo sounds on, upright, 3 lives, enemies medium, bird easy, bonus 010.
+//   Bonus never awards a life (a 'ret' at 0x5a07); 010 only sets the
+//   high-score table's top score to 30,000.
 wire [3:0] vid_r, vid_g, vid_b;
 wire       vid_hblank, vid_vblank;
 wire [7:0] audio_raw;

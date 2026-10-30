@@ -1,4 +1,4 @@
-# Bomb Jack (Tehkan, 1984) — Analogue Pocket
+# Bomb Jack — Analogue Pocket
 
 An Analogue Pocket port of **Bomb Jack** (Tehkan, 1984), built on the
 openFPGA framework.
@@ -29,16 +29,10 @@ Tehkan dedicated board:
 
 ## The Port
 
-Built on the MiSTer **Arcade-BombJack** core:
-
-- **MiSTer port:** Sorgelig
-- **FPGA arcade hardware implementation:** d18c7db — translated from the
-  original schematics (papilio project), DE1-SoC adaptation by MVV
-
-This Analogue Pocket build adapts that RTL to the openFPGA / APF framework
-at the game's native 15 kHz timing (256×224, 6 MHz pixel clock), rotated
-90° for the original cabinet's portrait orientation. Many thanks to the
-authors above.
+Built on the MiSTer **Arcade-BombJack** core. d18c7db's `bombjack_top.vhd`,
+translated from the original schematics, runs intact; everything around it is
+the shell that adapts it to openFPGA / APF at the game's native 15 kHz timing
+(256×224, 6 MHz pixel clock), rotated 90° for the cabinet's portrait screen.
 
 ## Controls
 
@@ -53,11 +47,6 @@ These are remappable from the Pocket's own Controls screen. One trade-off
 comes with that: openFPGA won't accept named buttons and the analog-stick
 mapping in the same file, so a docked controller's left stick no longer acts
 as a d-pad. Its actual d-pad still works.
-
-## Notes & Caveats
-
-Dip settings are fixed at the factory-style defaults: demo sounds on,
-upright cabinet, 3 lives, easy difficulty, bonus life every 30,000.
 
 ## Versions
 
@@ -87,27 +76,35 @@ Supply your own MAME romsets and build the images into
 Both match files by CRC32 and produce byte-identical images.
 
 The three clones are split sets, so keep the parent `bombjack.zip` alongside
-the clone zip when building them. Keep the `.rom` files in that folder and on
-your Pocket SD card, then pick the game from the core's menu.
+the clone zip when building them.
+
+Keep the `.rom` files in that folder and on your SD card — they land at
+`Assets/bombjack/common/` on the card. A game only works once its `.rom` is
+there; the menu lists all four either way.
+
+## Notes
+
+DIP settings are fixed at the factory-style defaults: demo sounds on,
+upright cabinet, 3 lives, easy difficulty, bonus life every 30,000.
 
 ## Credits
 
 - **Original arcade game:** Tehkan (1984)
-- **MiSTer port:** Sorgelig
-- **FPGA arcade core:** d18c7db (papilio), DE1-SoC adaptation by MVV
-- **Analogue Pocket port:** HarpMudd
+- **FPGA arcade core:** [d18c7db](https://github.com/d18c7db) — translated
+  from the schematics ([Papilio](http://papilio.cc/index.php?n=Playground.BombJack), 2012)
+- **DE1-SoC adaptation:** [MVV](https://github.com/mvvproject)
+- **MiSTer port:** Alexey Melnikov ([Sorgelig](https://github.com/Sorgelig))
+- **Analogue Pocket port:** [HarpMudd](https://github.com/harpmudd)
 - **Z80 CPU core (T80):**
-  - **Daniel Wallner** — original author (2001–2002, OpenCores)
-  - **Mike Johnson / MikeJ** (FPGAArcade) — DJNZ M1_n fix, clock enable, IM 2 fix
-    and interrupt-ack fix (v0232–0240); project tidy-up, March 2005 (Ver 300)
-  - **Sean Riddle** — parity flag for 8080 vs Z80 (Ver 301)
-  - **TobiFlex** — undocumented DDCB / FDCB opcodes (Ver 303, 20 April 2010)
-  - **Alexey Melnikov (Sorgelig)** — timing accuracy and ZEXDOC / ZEXALL /
-    Z80Full / Z80memptr verification (Ver 350, 2018), and the `T80pa`
-    pseudo-asynchronous top level
+  - **[Daniel Wallner](https://opencores.org/projects/t80)** — original author (2001–2002, OpenCores)
+  - **Mike Johnson / [MikeJ](https://www.fpgaarcade.com)** (FPGAArcade) — DJNZ M1_n fix, clock enable, IM 2 fix
+    and interrupt-ack fix (v0232–0240), the `T80sed` two-clock variant; project
+    tidy-up, March 2005 (Ver 300)
+  - **[Sean Riddle](http://seanriddle.com)** — parity flag for 8080 vs Z80 (Ver 301)
+  - **[TobiFlex](https://github.com/TobiFlex)** — undocumented DDCB / FDCB opcodes (Ver 303, 20 April 2010)
 - **YM2149 (AY-3-8910) sound core:** Mike Johnson / [MikeJ](https://www.fpgaarcade.com) (FPGAArcade), Jan 2005
-- **SDRAM controller, data loader, I2S audio, sync FIFO:** Adam Gastineau (agg23)
-- **openFPGA framework (APF), bridge command handler, reference `core_top`:** Analogue
+- **Data loader, I2S audio, sync FIFO:** Adam Gastineau ([agg23](https://github.com/agg23))
+- **openFPGA framework (APF), bridge command handler, reference `core_top`:** [Analogue](https://www.analogue.co)
 - **PLL and other megafunctions:** Intel/Altera (Quartus-generated)
 
 ## About / Support

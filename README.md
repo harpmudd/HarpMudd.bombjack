@@ -50,8 +50,8 @@ as a d-pad. Its actual d-pad still works.
 
 ## Versions
 
-Four sets run off the one core. Each has its own entry in the core's game
-list:
+Four sets run off the one core. Bomb Jack is at the top of the core's game
+list; the other three are in its `_alternatives` folder:
 
 | Menu entry | Set | |
 |---|---|---|

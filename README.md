@@ -45,22 +45,50 @@ authors above.
 | Pocket | Action |
 |---|---|
 | **D-Pad** | Move (8-way) |
-| **Any face button** | Jump |
+| **A / B / X / Y** | Jump |
 | **Start** | 1P Start (2P Start on controller 2) |
 | **Select** | Insert coin |
+
+These are remappable from the Pocket's own Controls screen. One trade-off
+comes with that: openFPGA won't accept named buttons and the analog-stick
+mapping in the same file, so a docked controller's left stick no longer acts
+as a d-pad. Its actual d-pad still works.
 
 ## Notes & Caveats
 
 Dip settings are fixed at the factory-style defaults: demo sounds on,
 upright cabinet, 3 lives, easy difficulty, bonus life every 30,000.
 
+## Versions
+
+Four sets run off the one core. Each has its own entry in the core's game
+list:
+
+| Menu entry | Set | |
+|---|---|---|
+| Bomb Jack | `bombjack` | Tehkan, 1984 |
+| Bomb Jack (Earlier) | `bombjack2` | Earlier revision |
+| Bomb Jack (Tecfri, Spain) | `bombjackt` | Tecfri licence |
+| Bomb Jack (Bootleg) | `bombjackbl` | Bootleg, 1985 |
+
+They differ only in the main CPU program. Graphics and sound are shared.
+
 ## ROMs
 
-ROMs are **not** included. Build your own from the bundled `.mra` recipe in
-`Assets/bombjack/common/` — it lists the required MAME romset files by name
-and CRC32, with no copyrighted data. Run it through the `mra` tool to produce
-`bombjack.rom`, then keep that `.rom` in the same folder (and on your Pocket
-SD card).
+ROMs are **not** included — nothing in this repo contains copyrighted data.
+Supply your own MAME romsets and build the images into
+`dist/Assets/bombjack/common/` either way:
+
+- **`.mra` recipe** — one per set in that folder. Run it through the standard
+  `mra` tool, e.g. `mra bombjack2.mra`.
+- **`pack_rom.py`** — drop the romset zips beside the script and run
+  `python pack_rom.py bombjack2`, one set per run.
+
+Both match files by CRC32 and produce byte-identical images.
+
+The three clones are split sets, so keep the parent `bombjack.zip` alongside
+the clone zip when building them. Keep the `.rom` files in that folder and on
+your Pocket SD card, then pick the game from the core's menu.
 
 ## Credits
 

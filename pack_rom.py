@@ -1,11 +1,20 @@
 """
 pack_rom.py — Build a flat ROM image for the HarpMudd Bomb Jack Pocket core.
 
-Bomb Jack (Tehkan, 1984). Single game, dedicated entity (papilio/d18c7db core
-via MiSTer Arcade-BombJack).
+Bomb Jack (Tehkan, 1984) and its MAME clones, all on the one board, so every
+set fills the same image. Dedicated entity (papilio/d18c7db core via MiSTer
+Arcade-BombJack).
 
 Usage:
-  python pack_rom.py [bombjack]
+  python pack_rom.py [bombjack|bombjack2|bombjackt|bombjackbl]
+
+Clones differ from the parent only in main CPU program:
+  bombjack2   13_r01b at page C
+  bombjackbl  12.bin at page B, 13.bin at page C
+  bombjackt   16K program ROMs (9.1j = pages 8+9, 12.1n = pages A+B), its own
+              13.1r, and 8K chips for 2.5n / 3.1e / 4.1h / 5.1k. Those load
+              natively into their 8K pages: the core reads only the low 4K of
+              each, which is byte-identical to the parent's 4K chips.
 
 ROM image layout (0x20000 bytes, byte offset = dn_addr in FPGA). The core
 demuxes ROM writes by 8K page off dn_addr[16:13] (bombjack_top.vhd for GFX,
@@ -44,7 +53,7 @@ DEFAULT_ZIP_DIR = next(
                  os.path.join(os.path.dirname(HERE), "Downloaded_Artifacts"))
      if d and os.path.isdir(d)),
     HERE)
-ASSETS_DIR      = os.path.join(HERE, "Assets", "bombjack", "common")
+ASSETS_DIR      = os.path.join(HERE, "dist", "Assets", "bombjack", "common")
 
 ROM_IMAGE_SIZE = 0x20000
 
@@ -68,9 +77,44 @@ BOMBJACK_ROM_DEFS = [
     (0x94694097, 0x2000, "16_m07b.bin (sprites 7M)",       0x1E000, None),
 ]
 
-#          rom_defs            out_name        description
+
+def clone_of(parent, replace):
+    """Parent defs with the entries at the given offsets swapped out."""
+    return [replace.get(d[3], d) for d in parent]
+
+
+BOMBJACK2_ROM_DEFS = clone_of(BOMBJACK_ROM_DEFS, {
+    0x18000: (0xbcafdd29, 0x2000, "13_r01b.bin (main prog 4)",   0x18000, None),
+})
+
+BOMBJACKBL_ROM_DEFS = clone_of(BOMBJACK_ROM_DEFS, {
+    0x16000: (0x0f4d0726, 0x2000, "12.bin      (main prog 3)",   0x16000, None),
+    0x18000: (0x9740f99b, 0x2000, "13.bin      (main prog 4)",   0x18000, None),
+})
+
+BOMBJACKT_ROM_DEFS = [
+    (0x8407917d, 0x2000, "1.6h  (audio CPU prog)",          0x00000, None),
+    (0xde796158, 0x2000, "2.5n  (bg tiles 4P)",             0x02000, None),
+    (0x54e1dac1, 0x2000, "3.1e  (char gen 8E)",             0x04000, None),
+    (0x05e428ab, 0x2000, "4.1h  (char gen 8H)",             0x06000, None),
+    (0xf282f29a, 0x2000, "5.1k  (char gen 8K)",             0x08000, None),
+    (0x51eebd89, 0x2000, "6.1l  (bg tiles 8L)",             0x0A000, None),
+    (0x9dd98e9d, 0x2000, "7.1n  (bg tiles 8N)",             0x0C000, None),
+    (0x3155ee7d, 0x2000, "8.1r  (bg tiles 8R)",             0x0E000, None),
+    (0x4b59a3bb, 0x4000, "9.1j  (main prog 0+1)",           0x10000, None),
+    (0x0a32506a, 0x4000, "12.1n (main prog 2+3)",           0x14000, None),
+    (0x964ac5c5, 0x2000, "13.1r (main prog 4)",             0x18000, None),
+    (0x101c858d, 0x2000, "14.7j (sprites 7J)",              0x1A000, None),
+    (0x013f58f2, 0x2000, "15.7k (sprites 7L)",              0x1C000, None),
+    (0x94694097, 0x2000, "16.7m (sprites 7M)",              0x1E000, None),
+]
+
+#            rom_defs             out_name          description
 GAMES = {
-    "bombjack": (BOMBJACK_ROM_DEFS, "bombjack.rom", "Bomb Jack (Tehkan, 1984)"),
+    "bombjack":   (BOMBJACK_ROM_DEFS,   "bombjack.rom",   "Bomb Jack (Tehkan, 1984)"),
+    "bombjack2":  (BOMBJACK2_ROM_DEFS,  "bombjack2.rom",  "Bomb Jack (earlier) (Tehkan, 1984)"),
+    "bombjackt":  (BOMBJACKT_ROM_DEFS,  "bombjackt.rom",  "Bomb Jack (Tecfri, Spain) (Tehkan, 1984)"),
+    "bombjackbl": (BOMBJACKBL_ROM_DEFS, "bombjackbl.rom", "Bomb Jack (bootleg, 1985)"),
 }
 
 

@@ -1,0 +1,32 @@
+<misterromdescription>
+	<name>Bomb Jack (bootleg)</name>
+	<setname>bombjackbl</setname>
+	<year>1985</year>
+	<manufacturer>bootleg</manufacturer>
+	<!--
+	  HarpMudd Bomb Jack (bootleg) - Analogue Pocket core ROM recipe (no copyrighted data).
+	  Build:  mra bombjackbl.mra   then copy the .rom into Assets/bombjack/common/.
+	-->
+	<rom index="0" zip="bombjackbl.zip|bombjack.zip" md5="none">
+		<part crc="8407917d" name="01_h03t.bin"></part>
+		<part crc="398d4a02" name="02_p04t.bin"></part>
+		<part crc="398d4a02" name="02_p04t.bin"></part>
+		<part crc="9f0470d5" name="03_e08t.bin"></part>
+		<part crc="9f0470d5" name="03_e08t.bin"></part>
+		<part crc="81ec12e6" name="04_h08t.bin"></part>
+		<part crc="81ec12e6" name="04_h08t.bin"></part>
+		<part crc="e87ec8b1" name="05_k08t.bin"></part>
+		<part crc="e87ec8b1" name="05_k08t.bin"></part>
+		<part crc="51eebd89" name="06_l08t.bin"></part>
+		<part crc="9dd98e9d" name="07_n08t.bin"></part>
+		<part crc="3155ee7d" name="08_r08t.bin"></part>
+		<part crc="c668dc30" name="09_j01b.bin"></part>
+		<part crc="52a1e5fb" name="10_l01b.bin"></part>
+		<part crc="b68a062a" name="11_m01b.bin"></part>
+		<part crc="0f4d0726" name="12.bin"></part>
+		<part crc="9740f99b" name="13.bin"></part>
+		<part crc="101c858d" name="14_j07b.bin"></part>
+		<part crc="013f58f2" name="15_l07b.bin"></part>
+		<part crc="94694097" name="16_m07b.bin"></part>
+	</rom>
+</misterromdescription>

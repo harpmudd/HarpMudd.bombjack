@@ -745,7 +745,7 @@ set_global_assignment -name VERILOG_FILE core/sync_fifo.v
 set_global_assignment -name SDC_FILE core/core_constraints.sdc
 set_global_assignment -name QIP_FILE core/mf_pllbase.qip
 set_global_assignment -name SIP_FILE core/mf_pllbase.sip
-# Popeye RTL -- Z80 CPU (T80) + game logic + AY-3-8910 + RAMs
+# Bomb Jack RTL -- dual Z80 (T80sed) + game logic + 3x AY-3-8910 (YM2149) + RAMs
 set_global_assignment -name VHDL_FILE rtl/dpram.vhd
 set_global_assignment -name VHDL_FILE rtl/memory/ram_1e.vhd
 set_global_assignment -name VHDL_FILE rtl/memory/ram_1h.vhd

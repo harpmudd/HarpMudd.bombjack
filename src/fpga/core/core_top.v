@@ -388,8 +388,10 @@ wire m_jump   = cont1_key[4] | cont1_key[5] | cont1_key[6] | cont1_key[7]
               | cont2_key[4] | cont2_key[5] | cont2_key[6] | cont2_key[7];
 
 // -- Bomb Jack game core (VHDL entity) -----------------------------------------
-// DIP presets (factory-style defaults; the entity takes switches as ports):
-//   demo sounds on, upright, 3 lives, enemies easy, bird easy, bonus every 30k.
+// DIP presets (the entity takes switches as ports), per MAME's switch table:
+//   demo sounds on, upright, 3 lives, enemies medium, bird easy, bonus 010.
+//   Bonus never awards a life (a 'ret' at 0x5a07); 010 only sets the
+//   high-score table's top score to 30,000.
 wire [3:0] vid_r, vid_g, vid_b;
 wire       vid_hblank, vid_vblank;
 wire [7:0] audio_raw;
@@ -495,8 +497,7 @@ assign video_hs           = vid_hs_r;
 
 // -- Audio (8-bit unsigned widened to 16, box-filter decimate to ~47 kHz I2S) --
 // bombjack_top drives audio as 8-bit unsigned (MiSTer: AUDIO_L = {audio,audio},
-// AUDIO_S = 0). Same decimator structure as shollow/Popeye/Tapper
-// (48 MHz / 1024 = 46.875 kHz).
+// AUDIO_S = 0). 48 MHz / 1024 = 46.875 kHz.
 wire [15:0] audio_l_raw = {audio_raw, audio_raw};
 wire [15:0] audio_r_raw = {audio_raw, audio_raw};
 
